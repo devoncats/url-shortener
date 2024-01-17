@@ -1,15 +1,22 @@
 {
-  "name": "backend",
+  "name": "url-shortner",
   "version": "1.0.0",
-  "description": "",
+  "description": "Backend of a URL shortner app using Node.js & Express.js",
   "main": "index.js",
   "scripts": {
+    "dev": "node --watch app/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "devDependencies": {
+    "standard": "17.1.0"
+  },
+  "eslintConfig": {
+    "extends": "./node_modules/standard/eslintrc.json"
+  },
   "dependencies": {
-    "express": "4.18.2"
+    "express": "^4.18.2"
   }
 }
