@@ -38,14 +38,14 @@ function App () {
   }
 
   return (
-    <main className='min-h-screen flex flex-col items-center justify-center'>
-      <article className='p-6 border rounded-xl border-black'>
+    <main className='min-h-screen flex flex-col items-center justify-center bg-[#f8fbfb]'>
+      <article className='p-6 border rounded-xl shadow-sm border-[#ececec] bg-white'>
         <section className='flex items-center justify-center gap-2'>
           <img src='/logo.svg' alt='Logo of the project' />
           <h1 className='text-3xl font-semibold'>Urlipsum</h1>
         </section>
 
-        <section className='lg:w-[30vw] w-screen h-fit flex flex-col gap-2 justify-between px-12 py-4'>
+        <section className='sm:w-[30vw] w-screen h-fit flex flex-col gap-2 justify-between px-12 py-4'>
           <h2 className='text-xl font-medium'>Create a short URL!</h2>
 
           <form className='grid gap-4' onSubmit={handleSubmit}>
@@ -57,7 +57,7 @@ function App () {
               value={long}
               onChange={handleChange}
               placeholder='https://example.com/very/long/url'
-              className='w-full px-4 py-2 border rounded-lg border-black'
+              className='w-full px-4 py-2 border-2 rounded-lg border-[#ececec] focus-visible:border-[#f15757] focus-visible:outline-none'
             />
 
             <fieldset className='flex items-end gap-4'>
@@ -69,12 +69,12 @@ function App () {
                 value={short}
                 onChange={handleChange}
                 placeholder='short-name'
-                className='w-full px-4 py-2 border rounded-lg border-black'
+                className='w-full px-4 py-2 border-2 rounded-lg border-[#ececec] focus-visible:border-[#f15757] focus-visible:outline-none'
               />
 
               <button
                 type='submit'
-                className='w-[12rem] h-fit px-4 py-2 border rounded-lg border-black'
+                className='w-[12rem] h-fit px-4 py-2 border-2 rounded-lg font-semibold text border-[#f15757] bg-[#f15757] text-white'
               >
                 Shorten
               </button>
@@ -84,7 +84,7 @@ function App () {
           {error && <p className='text-red-500'>Short name already exists!</p>}
         </section>
 
-        {data &&
+        {data[0] &&
           <section className='px-12'>
             <h2 className='text-xl font-medium'>Already used urls</h2>
             <ul>
