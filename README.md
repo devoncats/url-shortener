@@ -34,7 +34,7 @@ The URL Shortener project is a web application designed to shorten long URLs int
 
 3. Configure environment variables:
 
-  Create a .env file and set the necessary variables, including database connection details and API keys.
+  - Create a .env file and set the necessary variables, including database connection details and API keys.
 
 4. Run the application
 
