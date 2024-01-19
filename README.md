@@ -24,11 +24,13 @@ The URL Shortener project is a web application designed to shorten long URLs int
   ```bash
   git clone https://github.com/your-username/url-shortener.git
   cd url-shortener
+  ```
 
 2. Install dependencies
 
   ```bash
   npm install
+  ```
 
 3. Configure environment variables:
 
@@ -38,3 +40,4 @@ The URL Shortener project is a web application designed to shorten long URLs int
 
   ```bash
   npm run dev
+  ```
