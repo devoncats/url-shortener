@@ -5,8 +5,12 @@ const router = express.Router()
 const prisma = new PrismaClient()
 
 router.post('/', async (req, res) => {
-  await prisma.url.create({ data: req.body })
-  res.send('Created a new url!')
+  try {
+    await prisma.url.create({ data: req.body })
+    res.send('Created a new url!')
+  } catch (error) {
+    res.send('Failed to create a new url!')
+  }
 })
 
 router.get('/', async (req, res) => {

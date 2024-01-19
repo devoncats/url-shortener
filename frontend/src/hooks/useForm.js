@@ -14,6 +14,8 @@ export default function useForm (data) {
   }
 
   const handleSubmit = (event) => {
+    event.preventDefault()
+
     if (data.find((item) => item.short === short)) {
       setError(true)
       setShort('')
