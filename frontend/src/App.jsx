@@ -1,45 +1,15 @@
-import { useEffect, useState } from 'react'
-import axios from 'axios'
+import Form from './components/Form'
+import UsedUrl from './components/UsedUrl'
+import useFetch from './hooks/useFetch'
+import useForm from './hooks/useForm'
 
 function App () {
-  const [long, setLong] = useState('')
-  const [short, setShort] = useState('')
-  const [data, setData] = useState([])
-  const [error, setError] = useState(false)
-
-  useEffect(() => {
-    fetch('http://localhost:3000/')
-      .then(response => response.json())
-      .then(data => setData(data))
-  })
-
-  const handleChange = (event) => {
-    const { name, value } = event.target
-    if (name === 'long') setLong(value)
-    if (name === 'short') setShort(value)
-  }
-
-  const handleSubmit = (event) => {
-    event.preventDefault()
-    if (data.find(item => item.short === short)) {
-      setError(true)
-      setShort('')
-      return
-    }
-
-    axios.post('/', { long, short })
-      .then(response => {
-        console.log(response)
-      })
-
-    setShort('')
-    setLong('')
-    setError(false)
-  }
+  const data = useFetch('http://localhost:3000')
+  const { long, short, error, handleChange, handleSubmit } = useForm(data)
 
   return (
-    <main className='min-h-screen flex flex-col items-center justify-center bg-[#f8fbfb]'>
-      <article className='p-6 border rounded-xl shadow-sm border-[#ececec] bg-white'>
+    <main className='min-h-screen flex flex-col items-center justify-center bg-background-1 text-foreground-1'>
+      <article className='p-6 border rounded-xl shadow-sm bg-background-2 border-border-1'>
         <section className='flex items-center justify-center gap-2'>
           <img src='/logo.svg' alt='Logo of the project' />
           <h1 className='text-3xl font-semibold'>Urlipsum</h1>
@@ -47,54 +17,17 @@ function App () {
 
         <section className='sm:w-[30vw] w-screen h-fit flex flex-col gap-2 justify-between px-12 py-4'>
           <h2 className='text-xl font-medium'>Create a short URL!</h2>
-
-          <form className='grid gap-4' onSubmit={handleSubmit}>
-            <input
-              type='url'
-              name='long'
-              id='long'
-              required
-              value={long}
-              onChange={handleChange}
-              placeholder='https://example.com/very/long/url'
-              className='w-full px-4 py-2 border-2 rounded-lg border-[#ececec] focus-visible:border-[#f15757] focus-visible:outline-none'
-            />
-
-            <fieldset className='flex items-end gap-4'>
-              <input
-                type='text'
-                name='short'
-                id='short'
-                required
-                value={short}
-                onChange={handleChange}
-                placeholder='short-name'
-                className='w-full px-4 py-2 border-2 rounded-lg border-[#ececec] focus-visible:border-[#f15757] focus-visible:outline-none'
-              />
-
-              <button
-                type='submit'
-                className='w-[12rem] h-fit px-4 py-2 border-2 rounded-lg font-semibold text border-[#f15757] bg-[#f15757] text-white'
-              >
-                Shorten
-              </button>
-            </fieldset>
-          </form>
+          <Form
+            long={long}
+            short={short}
+            handleChange={handleChange}
+            handleSubmit={handleSubmit}
+          />
 
           {error && <p className='text-red-500'>Short name already exists!</p>}
         </section>
 
-        {data[0] &&
-          <section className='px-12'>
-            <h2 className='text-xl font-medium'>Already used urls</h2>
-            <ul>
-              {data.map((item) => (
-                <li key={item.short}>
-                  <p>{item.short}</p>
-                </li>
-              ))}
-            </ul>
-          </section>}
+        <UsedUrl data={data} />
       </article>
     </main>
   )
